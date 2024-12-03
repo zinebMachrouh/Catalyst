@@ -9,4 +9,4 @@ spring:
     password: "admin"
     driver-class-name: org.mariadb.jdbc.Driver
   profiles:
-    active: "prod"
+    active: "dev"
