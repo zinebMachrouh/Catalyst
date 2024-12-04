@@ -9,4 +9,9 @@ spring:
     password: "admin"
     driver-class-name: org.mariadb.jdbc.Driver
   profiles:
-    active: "dev"
+    active: "prod"
+
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always

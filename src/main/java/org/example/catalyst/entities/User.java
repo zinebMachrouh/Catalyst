@@ -2,6 +2,7 @@ package org.example.catalyst.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.catalyst.entities.enums.Role;
 
 import java.util.Collection;
 
@@ -22,13 +23,9 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private Boolean active = Boolean.FALSE;
+    private Boolean active = true;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Collection<Role> roles;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
