@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,9 +34,12 @@ public class SecurityConfig {
         jdbcDao.setDataSource(dataSource);
 
         jdbcDao.setUsersByUsernameQuery(
-                "SELECT username, password, active FROM user WHERE username = ?");
+                "SELECT username, password, active FROM user WHERE username = ?"
+        );
+
         jdbcDao.setAuthoritiesByUsernameQuery(
-                "SELECT role FROM user WHERE username = ?");
+                "SELECT username, CONCAT('ROLE_', role) AS authority FROM user WHERE username = ?"
+        );
 
         return jdbcDao;
     }
@@ -63,23 +65,18 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
-                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/user/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
-                )
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll
                 )
                 .logout(logout -> logout
                         .permitAll()
-                        .logoutSuccessUrl("/login?logout=true")
+                        .logoutSuccessUrl("/api/auth/login?logout=true")
                 )
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                        .maximumSessions(1)
-                        .expiredUrl("/login?expired=true")
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                 );
 
         return http.build();
     }
-
 }
