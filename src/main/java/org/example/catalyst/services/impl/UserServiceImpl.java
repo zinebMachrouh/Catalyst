@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        user.setRole(Role.ADMIN);
+        user.setRole(Role.valueOf(role));
         User updatedUser = userRepository.save(user);
 
         return toDTO(updatedUser);
