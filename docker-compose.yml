@@ -25,10 +25,16 @@ services:
     ports:
       - "8085:8080"
     environment:
+      - SPRING_PROFILES_ACTIVE=prod
       - SPRING_DATASOURCE_URL=jdbc:mariadb://db:3306/Catalyst
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=admin
       - SWAGGER_ACTIVATION=false
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=false
+      - SPRING_APPLICATION_NAME=Catalyst
+      - SPRING_SESSION_STORE_TYPE=jdbc
+      - SPRING_SESSION_JDBC_INITIALIZE_SCHEMA=always
     networks:
       - network-data
     depends_on:
