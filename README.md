@@ -1,10 +1,8 @@
 # 🚀 Welcome to Catalyst!
 
-## Hello, Full Stack Developers! 👋
+## Hello, Fellow Developers! 👋
 
 Welcome to **Catalyst**, a secure and scalable REST API application designed to manage products, categories, and users efficiently. This project integrates modern technologies and deployment solutions to deliver a robust application framework.
-
----
 
 ## 🛠️ Project Context
 
