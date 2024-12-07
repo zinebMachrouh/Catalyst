@@ -4,8 +4,6 @@ import org.example.catalyst.dto.CategoryDTO;
 import org.example.catalyst.dto.ProductDTO;
 import org.example.catalyst.entities.Category;
 import org.example.catalyst.entities.Product;
-import org.example.catalyst.exceptions.AlreadyExistsException;
-import org.example.catalyst.exceptions.DoesNotExistsException;
 import org.example.catalyst.repositories.CategoryRepository;
 import org.example.catalyst.repositories.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
