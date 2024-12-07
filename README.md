@@ -129,6 +129,11 @@ As a Full Stack Developer, you are tasked with:
    - Run `docker compose up -d --build` to build and run the application.
    - Access the application at `http://localhost:8085`.
 
+2. **Deploy with Jenkins**:
+   - Access the Jenkins dashboard at `http://localhost:9090`.
+   - Create a new pipeline job and configure the pipeline script.
+   - Run the pipeline to build and deploy the application.
+
 ## 🎉 Get Started with Catalyst Today!
 
 For any questions, feedback, or suggestions, feel free to reach out to us. 📧
